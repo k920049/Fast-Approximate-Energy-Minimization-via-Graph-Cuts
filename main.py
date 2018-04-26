@@ -26,7 +26,6 @@ def file_write(data, file_name):
     else:
         print("Not enough dimensions\n")
 
-
 def rgb2gray(rgb):
     return np.dot(rgb[..., :3], [0.299, 0.587, 0.114])
 
@@ -50,7 +49,8 @@ def Main():
     axes.imshow(processed, cmap=cm.gray, aspect="equal", interpolation="none", vmin=-16.0, vmax=16.0)
     plt.show()
 
-    graph = GraphCut(5, noise)
+    noise_int = np.random.randint(low=0, high=32, size=(noise.shape[0], noise.shape[1]))
+    graph = GraphCut(10, noise, processed)
     graph.solve()
 
     print("Solved")

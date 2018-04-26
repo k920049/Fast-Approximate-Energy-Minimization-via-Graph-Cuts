@@ -15,6 +15,7 @@ class Dinic:
         self.level = [-1] * _size
         self.work = [0] * _size
         self.size = _size
+        self.visited = [False] * self.size
 
     def set_source_and_sink(self, _S, _E):
         self.S = _S
@@ -35,6 +36,14 @@ class Dinic:
         self.vt[e].append(Edge(s, 0, len(self.vt[s]) - 1))
         self.vt_copy[s].append(Edge(e, c, len(self.vt[e])))
         self.vt_copy[e].append(Edge(s, 0, len(self.vt[s]) - 1))
+
+
+    def dfs_cut(self, s):
+        self.visited[s] = True
+        for i in range(len(self.vt[s])):
+            if self.vt[s][i].cap > 0 and not self.visited[self.vt[s][i].v]:
+                self.dfs_cut(self.vt[s][i].v)
+
 
     def bfs(self):
         self.level = [-1] * self.size
@@ -77,33 +86,17 @@ class Dinic:
         return 0
 
     def get_cut(self):
-        q = Queue()
-        q.put_nowait(self.S)
-        check = [False] * self.size
-        check[self.S] = True
-        s = set()
-        t = set()
-
-        while not q.empty():
-            here = q.get_nowait()
-
-            for i in range(len(self.vt[here])):
-                there = self.vt[here][i].v
-                cap = self.vt[here][i].cap
-
-                if cap > 0:
-                    if not check[there]:
-                        check[there] = True
-                        q.put_nowait(there)
-
+        self.dfs_cut(self.S)
+        edges = set()
         for here in range(self.size):
             for j in range(len(self.vt[here])):
                 there = self.vt[here][j].v
-                if check[here] == True and check[there] == False and self.vt_copy[here][j].cap > 0:
-                    s.add(i)
-                    t.add(j)
+                cap = self.vt_copy[here][j].cap
+                if self.visited[here] and not self.visited[there] and cap > 0:
+                    edges.add((here, there))
+        return edges
 
-        return s, t
+
 
 
 
