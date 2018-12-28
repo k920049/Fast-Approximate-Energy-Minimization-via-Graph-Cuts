@@ -1,10 +1,10 @@
 # Fast Approximate Energy Minimization via GraphCut
 
 ## Introduction
-![Slide1](./markdown/Graph_Cut_페이지_2.jpg)
-![Slide2](./markdown/Graph_Cut_페이지_3.jpg)
-![Slide3](./markdown/Graph_Cut_페이지_4.jpg)
-![Slide4](./markdown/Graph_Cut_페이지_5.jpg)
+![Slide1](./markdown/Graph_Cut_페이지_2.jpg){width: 200px;}
+![Slide2](./markdown/Graph_Cut_페이지_3.jpg){width: 200px;}
+![Slide3](./markdown/Graph_Cut_페이지_4.jpg){width: 200px;}
+![Slide4](./markdown/Graph_Cut_페이지_5.jpg){width: 200px;}
 
 ## Result
 ![Result1](./markdown/Image.png)
